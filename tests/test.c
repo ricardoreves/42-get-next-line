@@ -24,7 +24,6 @@ int	main(int argc, char **argv)
 	{
 		i = 0;
 		fd = open(argv[1], O_RDONLY);
-		line = get_next_line(fd);
 		while (++i)
 		{
 			line = get_next_line(fd);
