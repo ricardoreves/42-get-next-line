@@ -6,13 +6,13 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 21:00:55 by rpinto-r          #+#    #+#             */
-/*   Updated: 2021/11/09 13:11:49 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:50:42 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../incs/get_next_line.h"
 
-int	ft_strlen(char *s)
+ int	gnl_strlen(char *s)
 {
 	int	i;
 
@@ -22,12 +22,12 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *s)
+ char	*gnl_strdup(char *s)
 {
 	char	*str;
 	int		len;
 
-	len = ft_strlen(s);
+	len = gnl_strlen(s);
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (0);
@@ -37,14 +37,14 @@ char	*ft_strdup(char *s)
 	return (str);
 }
 
-char	*ft_concat_buffer(char *buffer, char *buffer_read)
+ char	*gnl_concat_buffer(char *buffer, char *buffer_read)
 {
 	int		i;
 	int		j;
 	int		len;
 	char	*str;
 
-	len = ft_strlen(buffer) + ft_strlen(buffer_read);
+	len = gnl_strlen(buffer) + gnl_strlen(buffer_read);
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (0);
@@ -56,21 +56,21 @@ char	*ft_concat_buffer(char *buffer, char *buffer_read)
 	while (buffer_read[j])
 		str[i++] = buffer_read[j++];
 	str[i] = 0;
-	ft_free(buffer);
+	gnl_free(buffer);
 	return (str);
 }
 
-void	ft_update_buffer(char **buffer, int start)
+ void	gnl_update_buffer(char **buffer, int start)
 {
 	int		i;
 	int		len;
 	char	*tmp;
 
 	tmp = *buffer;
-	len = ft_strlen(tmp) - start;
+	len = gnl_strlen(tmp) - start;
 	tmp = malloc(sizeof(char) * len + 1);
 	if (!tmp)
-		ft_free(tmp);
+		gnl_free(tmp);
 	else
 	{
 		i = 0;
@@ -78,11 +78,11 @@ void	ft_update_buffer(char **buffer, int start)
 			tmp[i++] = (*buffer)[start++];
 		tmp[i] = 0;
 	}
-	ft_free(*buffer);
+	gnl_free(*buffer);
 	*buffer = tmp;
 }
 
-char	*ft_free(char *str)
+ char	*gnl_free(char *str)
 {
 	if (str)
 	{

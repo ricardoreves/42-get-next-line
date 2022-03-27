@@ -6,13 +6,13 @@
 /*   By: rpinto-r <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 17:07:21 by rpinto-r          #+#    #+#             */
-/*   Updated: 2021/11/09 13:10:21 by rpinto-r         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:48:55 by rpinto-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../incs/get_next_line.h"
 
-int	ft_has_next_line(char *s)
+ int	gnl_has_next_line(char *s)
 {
 	int	i;
 
@@ -23,7 +23,7 @@ int	ft_has_next_line(char *s)
 	return (0);
 }
 
-int	ft_length_next_line(char *s)
+ int	gnl_length_next_line(char *s)
 {
 	int	i;
 
@@ -34,13 +34,13 @@ int	ft_length_next_line(char *s)
 	return (i);
 }
 
-char	*ft_return_next_line(char **buffer)
+ char	*gnl_return_next_line(char **buffer)
 {
 	int		i;
 	int		len;
 	char	*line;
 
-	len = ft_length_next_line(*buffer);
+	len = gnl_length_next_line(*buffer);
 	line = malloc(sizeof(char) * len + 1);
 	if (!line)
 		return (0);
@@ -48,14 +48,14 @@ char	*ft_return_next_line(char **buffer)
 	while (++i < len)
 		line[i] = (*buffer)[i];
 	line[len] = 0;
-	ft_update_buffer(buffer, len);
+	gnl_update_buffer(buffer, len);
 	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	static char	buffer_read[BUFFER_SIZE + 1];
+	 char	*buffer;
+	 char	buffer_read[BUFFER_SIZE + 1];
 	int			bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
@@ -66,15 +66,15 @@ char	*get_next_line(int fd)
 		if (bytes_read < 0 || (bytes_read == 0 && buffer_read[0] == 0))
 			return (0);
 		if (!buffer)
-			buffer = ft_strdup("");
+			buffer = gnl_strdup("");
 		if ((bytes_read == 0 && buffer[0] == 0))
-			return (ft_free(buffer));
+			return (gnl_free(buffer));
 		if (bytes_read == 0)
 			break ;
 		buffer_read[bytes_read] = 0;
-		buffer = ft_concat_buffer(buffer, buffer_read);
-		if (ft_has_next_line(buffer))
+		buffer = gnl_concat_buffer(buffer, buffer_read);
+		if (gnl_has_next_line(buffer))
 			break ;
 	}
-	return (ft_return_next_line(&buffer));
+	return (gnl_return_next_line(&buffer));
 }

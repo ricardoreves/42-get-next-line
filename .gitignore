@@ -1,3 +1,5 @@
 gnlTester/
 tests/gnl
 .vscode
+*.o
+*.a
